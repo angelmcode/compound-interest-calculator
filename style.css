@@ -1,0 +1,80 @@
+/* body {
+  background-color: brown;
+} */
+#hola {
+  background-color: beige;
+}
+
+header {
+  /* margin: auto; */
+  background-color: azure;
+  width: 100%;
+  margin-top: -20px;
+  margin-bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* position: fixed; */
+}
+
+#container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: beige;
+  box-shadow: 2px 2px 10px 0px gray;
+  width: 550px;
+  height: 350px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#top-container {
+  background-color: rgb(39, 192, 212);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: -10px;
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
+#bottom-container {
+  /* background-color: rgb(39, 192, 212); */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
+label {
+  font-size: 20px;
+  font-family: "Verdana", "Impact";
+  position: relative;
+  top: 20px;
+  right: 10px;
+  width: 500px;
+  height: 200px;
+  margin-top: 0px;
+  margin-bottom: 2px;
+}
+
+input {
+  position: relative;
+  bottom: 2px;
+  left: 158px;
+  width: 200px;
+  height: 200px;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}

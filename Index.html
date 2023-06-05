@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hola</title>
+    <link href="style.css" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <h1>Calculadora de Inversion</h1>
+    </header>
+    <main>
+      <div id="main-container">
+        <div id="top-container">
+          <div id="container">
+            <label>Escribe el capital inicial: </label>
+            <input type="number" id="scapitalInicial" required/><br><br>
+
+            <label>Escribe los años de inversión: </label>
+            <input type="number" id="saniosInversion" required/><br><br>
+
+            <label>Escribe el interes anual: </label>
+            <input type="number" id="sInteresAnual" required/><br><br>
+
+            <label>Escribe la aportación mensual: </label>
+            <input type="number" id="sAportacionMensual" required/><br><br>
+          
+            <button onclick="calcularResultado()">resultado</button>
+          </div>
+          <div id="resultadoImpreso">  
+          </div>
+        </div>
+        <div id="bottom-container">
+          <table id="tabla">
+          </table>
+        </div>
+      </div>
+
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
