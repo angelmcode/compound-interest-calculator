@@ -1,92 +1,87 @@
 function calcularResultado(){
   
-  // establecemos las variables, y tomamos los valores que se ingresan en la etiqueta input
-  var capitalInicial = document.getElementById("scapitalInicial").value;
-  var aniosInversion = document.getElementById("saniosInversion").value;
-  var interesAnual = document.getElementById("sInteresAnual").value;
-  var aportacioMensual = document.getElementById("sAportacionMensual").value;
-  var capitalResultante;
+  // we set the variables, and we take the values that are entered in the input tag
+  var initialCapital = document.getElementById("scapitalInicial").value;
+  var yearsInvest = document.getElementById("saniosInversion").value;
+  var annualInterest = document.getElementById("sInteresAnual").value;
+  var monthlyContribution = document.getElementById("sAportacionMensual").value;
+  var resultingCapital;
   
-  // utilizamos parseInt para convertir los datos strings en numeros enteros
-  var capitalInicial = parseInt(capitalInicial);
-  var aniosInversion = parseInt(aniosInversion);
-  var interesAnual = parseInt(interesAnual);
-  var aportacioMensual = parseInt(aportacioMensual);
+  // we use parseInt to convert string data into integers
+  var initialCapital = parseInt(initialCapital);
+  var yearsInvest = parseInt(yearsInvest);
+  var annualInterest = parseInt(annualInterest);
+  var monthlyContribution = parseInt(monthlyContribution);
   
-  // ayuda a darle formato a los numeros que queramos presentar en pantalla
+  // helps to format the numbers that we want to display on the screen
   var formato = new Intl.NumberFormat(undefined, {
     style: "currency",
     currency: "MXN",
     maximumFractionDigits: 2,
   });
   
-  // multiplica por 12 los años de inversion, para dar como resultado la cantidad de meses totales
-  aniosInversion = aniosInversion * 12;
-  // divide el interes anual entre 100 y luego entre 12, para obtener un numero decimal que podamos utilizar 
-  interesAnual = (interesAnual / 100) / 12;
+  // multiply the years of investment by 12 to get the total number of months
+  yearsInvest = yearsInvest * 12;
+  // divide the annual interest by 100 and then by 12, to get a decimal number that we can use 
+  annualInterest = (annualInterest / 100) / 12;
   
-  // el valor de capital inicial se guarda en la variable capital resultante
-  capitalResultante = capitalInicial;
+  // the initial capital value is stored in the resulting capital variable
+  resultingCapital = initialCapital;
     
-  // esta es la formula para calcular el capital inicial mas los intereses en el primer periodo
-  capitalResultante = capitalResultante * (1 + interesAnual);
+  // this is the formula for calculating the initial capital plus the interest in the first period
+  resultingCapital = resultingCapital * (1 + annualInterest);
 
-  // esta variable contiene los intereses ganados en el primer periodo  
-  var interesTablaPrimerFila = capitalResultante - capitalInicial;
+  // this variable contains the interest earned in the first period  
+  var tableFirstRowInterest = resultingCapital - initialCapital;
 
-  // en esta linea establecemos los titulos de las columnas de la tabla
-  document.getElementById("tabla").insertAdjacentHTML("beforeend","<tr><th>Mes</th><th>Capital Inicial +</th><th>Aportacion Mensual +</th><th>Interes Mensual =</th><th>Capital Resultante</th></tr>");
+  // in this line, we set the titles of the table columns
+  document.getElementById("tabla").insertAdjacentHTML("beforeend","<tr><th>Month</th><th>Initial Capital +</th><th>Monthly Contribution +</th><th>Monthly Interest =</th><th>Resulting Capital</th></tr>");
 
-  // en esta linea establecemos los datos de la primera fila o primer periodo de la tabla
+  // in this line, we set the data for the first row or first period of the table
   document.getElementById("tabla").insertAdjacentHTML("beforeend",`<tr><td>1</td><td>${
-    formato.format(capitalInicial)
+    formato.format(initialCapital)
   }</td><td>$0</td><td>${
-    formato.format(interesTablaPrimerFila)
+    formato.format(tableFirstRowInterest)
   }</td><td>${
-    formato.format(capitalResultante)
+    formato.format(resultingCapital)
   }</td></tr>`);
-  // console.log(capitalResultante)
+  // console.log(resultingCapital);
 
-  // creamos un ciclo for para obtener los capitales resultantes de cada uno de los periodos
-  for ( var i = 0; i < aniosInversion - 1; i++ ){
-    // establecemos la variable capiInicialTabla para contener el valor del capitalResultante antes de pasar por el ciclo
-    var capiInicialTabla = capitalResultante;
-    // aqui sumamos la aportacion mensual al capital inicial
-    capitalResultante = capitalResultante + aportacioMensual;
-    // aqui calculamos los intereses y los sumamos al capital resultante
-    capitalResultante = capitalResultante * (1 + interesAnual);
-    // aqui obtenemos el interes neto restando al capital resultante el capital inicial mas la aportacion mensual
-    var interesTabla = capitalResultante - (capiInicialTabla + aportacioMensual);
-    // aqui obtenemos el capital total aportado sumando el total del capital inicial al total de aportaciones mensuales
-    var capitalTotalAportado = capitalInicial + (aportacioMensual * (aniosInversion-1));
-    // aqui obtenemos el interes neto total al restarle el capital aportado al capital resultante
-    var interesTabla2 = capitalResultante - capitalTotalAportado;
+  // we create a for loop to get the resulting capitals for each period
+  for ( var i = 0; i < yearsInvest - 1; i++ ){
+    // we set the tableInitialCapital variable to contain the value of the resultingCapital variable before we go through the loop
+    var tableInitialCapital = resultingCapital;
+    // here we add the monthly contribution to the initial capital
+    resultingCapital = resultingCapital + monthlyContribution;
+    // here we calculate the interest and add it to the resulting capital
+    resultingCapital = resultingCapital * (1 + annualInterest);
+    // here we get the net interest by subtracting the initial capital plus the monthly contribution from the resulting capital
+    var tableInterest = resultingCapital - (tableInitialCapital + monthlyContribution);
+    // here we get the total contributed capital, adding the total initial capital to the total monthly contributions
+    var totalContributedCapital = initialCapital + (monthlyContribution * (yearsInvest-1));
+    // here we get the total net interest by subtracting the contributed capital from the resulting capital
+    var tableInterest2 = resultingCapital - totalContributedCapital;
     
-    // en esta linea establecemos los datos de la segunda fila o periodo en adelante de la tabla
+    // in this line, we set the data from the second row or period onwards in the table
     document.getElementById("tabla").insertAdjacentHTML("beforeend",`<tr><td>${
       i+2
     }</td><td>${
-      formato.format(capiInicialTabla)
+      formato.format(tableInitialCapital)
     }</td><td>${
-      formato.format(aportacioMensual)
+      formato.format(monthlyContribution)
     }</td><td>${
-      formato.format(interesTabla)
+      formato.format(tableInterest)
     }</td><td>${
-      formato.format(capitalResultante)
+      formato.format(resultingCapital)
     }</td></tr>`);
     // document.getElementById("resultadoImpreso").insertAdjacentHTML("afterend",`<p>${formato.format(capitalResultante)}<p>`);
   }
-  // aqui obtenemos el capital total y lo mostramos
-  document.getElementById("resultadoImpreso").innerHTML = `<span>El capital resultante total es: ${
-    formato.format(capitalResultante)
-  } </span><span>El capital total aportado es: ${
-    formato.format(capitalTotalAportado)
-  } </span><span>El interes neto total es: ${
-    formato.format(interesTabla2)
+  // here we get the total resulting capital, the total contributed capital and the total net interest and display them
+  document.getElementById("resultadoImpreso").innerHTML = `<span>The Total Resulting Capital is: ${
+    formato.format(resultingCapital)
+  } </span><span>The Total Contributed Capital is: ${
+    formato.format(totalContributedCapital)
+  } </span><span>The Total Net Interest is: ${
+    formato.format(tableInterest2)
   } </span>`;
   }
-
-
-
-  
-
