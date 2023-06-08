@@ -35,7 +35,7 @@ function calcularResultado(){
   var interesTablaPrimerFila = capitalResultante - capitalInicial;
 
   // en esta linea establecemos los titulos de las columnas de la tabla
-  document.getElementById("tabla").insertAdjacentHTML("beforeend","<tr><th>mes</th><th>capital inicial +</th><th>aportacion mensual +</th><th>interes mensual =</th><th>capital resultante</th></tr>");
+  document.getElementById("tabla").insertAdjacentHTML("beforeend","<tr><th>Mes</th><th>Capital Inicial +</th><th>Aportacion Mensual +</th><th>Interes Mensual =</th><th>Capital Resultante</th></tr>");
 
   // en esta linea establecemos los datos de la primera fila o primer periodo de la tabla
   document.getElementById("tabla").insertAdjacentHTML("beforeend",`<tr><td>1</td><td>${
@@ -58,7 +58,9 @@ function calcularResultado(){
     // aqui obtenemos el interes neto restando al capital resultante el capital inicial mas la aportacion mensual
     var interesTabla = capitalResultante - (capiInicialTabla + aportacioMensual);
     // aqui obtenemos el capital total aportado sumando el total del capital inicial al total de aportaciones mensuales
-    var capitalTotalAportado = capiInicialTabla + aportacioMensual;
+    var capitalTotalAportado = capitalInicial + (aportacioMensual * (aniosInversion-1));
+    // aqui obtenemos el interes neto total al restarle el capital aportado al capital resultante
+    var interesTabla2 = capitalResultante - capitalTotalAportado;
     
     // en esta linea establecemos los datos de la segunda fila o periodo en adelante de la tabla
     document.getElementById("tabla").insertAdjacentHTML("beforeend",`<tr><td>${
@@ -75,12 +77,12 @@ function calcularResultado(){
     // document.getElementById("resultadoImpreso").insertAdjacentHTML("afterend",`<p>${formato.format(capitalResultante)}<p>`);
   }
   // aqui obtenemos el capital total y lo mostramos
-  document.getElementById("resultadoImpreso").innerHTML = `El capital resultante total es: ${
+  document.getElementById("resultadoImpreso").innerHTML = `<span>El capital resultante total es: ${
     formato.format(capitalResultante)
-  } <span>el capital total aportado es: ${
+  } </span><span>El capital total aportado es: ${
     formato.format(capitalTotalAportado)
-  } </span><span>el interes neto total es: ${
-    formato.format(interesTabla)
+  } </span><span>El interes neto total es: ${
+    formato.format(interesTabla2)
   } </span>`;
   }
 
